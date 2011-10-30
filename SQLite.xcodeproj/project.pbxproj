@@ -78,6 +78,7 @@
 		456D2A9C145D7BFD00B1513F /* SQLite3Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLite3Types.h; path = ../../../Repository/CoreSQLite3/SQLite3Types.h; sourceTree = "<group>"; };
 		456D2AB7145D7F0E00B1513F /* CoreSQLite3Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreSQLite3Connection.h; sourceTree = "<group>"; };
 		456D2AB8145D7F0E00B1513F /* CoreSQLite3Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreSQLite3Connection.m; sourceTree = "<group>"; };
+		456D2ABB145D817900B1513F /* gen_sqlite_meta.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = gen_sqlite_meta.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +130,7 @@
 				456D2A64145D7B0300B1513F /* Supporting Files */,
 				456D2AB7145D7F0E00B1513F /* CoreSQLite3Connection.h */,
 				456D2AB8145D7F0E00B1513F /* CoreSQLite3Connection.m */,
+				456D2ABB145D817900B1513F /* gen_sqlite_meta.rb */,
 			);
 			path = SQLite;
 			sourceTree = "<group>";
