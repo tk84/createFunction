@@ -1,0 +1,338 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		456D2A5F145D7B0300B1513F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456D2A5E145D7B0300B1513F /* Cocoa.framework */; };
+		456D2A61145D7B0300B1513F /* MacRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456D2A60145D7B0300B1513F /* MacRuby.framework */; };
+		456D2A68145D7B0300B1513F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 456D2A66145D7B0300B1513F /* InfoPlist.strings */; };
+		456D2A6A145D7B0300B1513F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 456D2A69145D7B0300B1513F /* main.m */; };
+		456D2A6F145D7B0300B1513F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 456D2A6D145D7B0300B1513F /* MainMenu.xib */; };
+		456D2A72145D7B0300B1513F /* rb_main.rb in Resources */ = {isa = PBXBuildFile; fileRef = 456D2A71145D7B0300B1513F /* rb_main.rb */; };
+		456D2A74145D7B0300B1513F /* AppDelegate.rb in Resources */ = {isa = PBXBuildFile; fileRef = 456D2A73145D7B0300B1513F /* AppDelegate.rb */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		456D2A5A145D7B0300B1513F /* SQLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SQLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		456D2A5E145D7B0300B1513F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		456D2A60145D7B0300B1513F /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = Library/Frameworks/MacRuby.framework; sourceTree = DEVELOPER_DIR; };
+		456D2A65145D7B0300B1513F /* SQLite-Info.plist */ = {isa = PBXFileReference; path = "SQLite-Info.plist"; sourceTree = "<group>"; };
+		456D2A67145D7B0300B1513F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		456D2A69145D7B0300B1513F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		456D2A6B145D7B0300B1513F /* SQLite-Prefix.pch */ = {isa = PBXFileReference; path = "SQLite-Prefix.pch"; sourceTree = "<group>"; };
+		456D2A6E145D7B0300B1513F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		456D2A71145D7B0300B1513F /* rb_main.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
+		456D2A73145D7B0300B1513F /* AppDelegate.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = AppDelegate.rb; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		456D2A57145D7B0300B1513F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				456D2A5F145D7B0300B1513F /* Cocoa.framework in Frameworks */,
+				456D2A61145D7B0300B1513F /* MacRuby.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		456D2A4F145D7B0300B1513F = {
+			isa = PBXGroup;
+			children = (
+				456D2A63145D7B0300B1513F /* SQLite */,
+				456D2A5D145D7B0300B1513F /* Frameworks */,
+				456D2A5B145D7B0300B1513F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		456D2A5B145D7B0300B1513F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				456D2A5A145D7B0300B1513F /* SQLite.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		456D2A5D145D7B0300B1513F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				456D2A5E145D7B0300B1513F /* Cocoa.framework */,
+				456D2A60145D7B0300B1513F /* MacRuby.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		456D2A63145D7B0300B1513F /* SQLite */ = {
+			isa = PBXGroup;
+			children = (
+				456D2A73145D7B0300B1513F /* AppDelegate.rb */,
+				456D2A6C145D7B0300B1513F /* Resources */,
+				456D2A70145D7B0300B1513F /* Other Sources */,
+				456D2A64145D7B0300B1513F /* Supporting Files */,
+			);
+			path = SQLite;
+			sourceTree = "<group>";
+		};
+		456D2A64145D7B0300B1513F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				456D2A65145D7B0300B1513F /* SQLite-Info.plist */,
+				456D2A66145D7B0300B1513F /* InfoPlist.strings */,
+				456D2A69145D7B0300B1513F /* main.m */,
+				456D2A6B145D7B0300B1513F /* SQLite-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		456D2A6C145D7B0300B1513F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				456D2A6D145D7B0300B1513F /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		456D2A70145D7B0300B1513F /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				456D2A71145D7B0300B1513F /* rb_main.rb */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		456D2A62145D7B0300B1513F /* Deployment */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "--compile --embed";
+			buildConfigurationList = 456D2A7A145D7B0300B1513F /* Build configuration list for PBXLegacyTarget "Deployment" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/local/bin/macruby_deploy;
+			dependencies = (
+			);
+			name = Deployment;
+			passBuildSettingsInEnvironment = 1;
+			productName = Deployment;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXNativeTarget section */
+		456D2A59145D7B0300B1513F /* SQLite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 456D2A77145D7B0300B1513F /* Build configuration list for PBXNativeTarget "SQLite" */;
+			buildPhases = (
+				456D2A56145D7B0300B1513F /* Sources */,
+				456D2A57145D7B0300B1513F /* Frameworks */,
+				456D2A58145D7B0300B1513F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SQLite;
+			productName = SQLite;
+			productReference = 456D2A5A145D7B0300B1513F /* SQLite.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		456D2A51145D7B0300B1513F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 456D2A54145D7B0300B1513F /* Build configuration list for PBXProject "SQLite" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 456D2A4F145D7B0300B1513F;
+			productRefGroup = 456D2A5B145D7B0300B1513F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				456D2A59145D7B0300B1513F /* SQLite */,
+				456D2A62145D7B0300B1513F /* Deployment */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		456D2A58145D7B0300B1513F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				456D2A68145D7B0300B1513F /* InfoPlist.strings in Resources */,
+				456D2A6F145D7B0300B1513F /* MainMenu.xib in Resources */,
+				456D2A72145D7B0300B1513F /* rb_main.rb in Resources */,
+				456D2A74145D7B0300B1513F /* AppDelegate.rb in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		456D2A56145D7B0300B1513F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				456D2A6A145D7B0300B1513F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		456D2A66145D7B0300B1513F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				456D2A67145D7B0300B1513F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		456D2A6D145D7B0300B1513F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				456D2A6E145D7B0300B1513F /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		456D2A75145D7B0300B1513F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		456D2A76145D7B0300B1513F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		456D2A78145D7B0300B1513F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SQLite/SQLite-Prefix.pch";
+				INFOPLIST_FILE = "SQLite/SQLite-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		456D2A79145D7B0300B1513F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SQLite/SQLite-Prefix.pch";
+				INFOPLIST_FILE = "SQLite/SQLite-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		456D2A7B145D7B0300B1513F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		456D2A7C145D7B0300B1513F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		456D2A54145D7B0300B1513F /* Build configuration list for PBXProject "SQLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				456D2A75145D7B0300B1513F /* Debug */,
+				456D2A76145D7B0300B1513F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		456D2A77145D7B0300B1513F /* Build configuration list for PBXNativeTarget "SQLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				456D2A78145D7B0300B1513F /* Debug */,
+				456D2A79145D7B0300B1513F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		456D2A7A145D7B0300B1513F /* Build configuration list for PBXLegacyTarget "Deployment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				456D2A7B145D7B0300B1513F /* Debug */,
+				456D2A7C145D7B0300B1513F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 456D2A51145D7B0300B1513F /* Project object */;
+}
