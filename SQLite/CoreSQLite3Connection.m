@@ -11,6 +11,18 @@
 @implementation SQLite3Connection (Function)
 id function_map;
 
+SQLite3Status CoreSQLite3ConnectionRegisterFunction(SQLite3ConnectionRef connection, CFStringRef name, CFIndex argc, void (*f)(sqlite3_context *, int, sqlite3_value **)) {
+  SQLite3Status status = kSQLite3StatusError;
+  if (connection) {
+    if (name) {
+      __SQLite3UTF8String utf8Name = __SQLite3UTF8StringMake(connection->allocator, name);
+      status = sqlite3_create_function_v2(connection->db, __SQLite3UTF8StringGetBuffer(utf8Name), (int)argc, SQLITE_ANY, (void *)name, f, NULL, NULL, NULL);
+      __SQLite3UTF8StringDestroy(utf8Name);
+    }
+  }
+  return status;
+}
+
 void __sqlite_function_a(sqlite3_context *context, int argc, sqlite3_value **argv)
 {
   id (^block)(id) = [function_map objectAtIndex:0];
@@ -34,7 +46,81 @@ void __sqlite_function_a(sqlite3_context *context, int argc, sqlite3_value **arg
 
 void __sqlite_function_b(sqlite3_context *context, int argc, sqlite3_value **argv)
 {
+  id (^block)(id) = sqlite3_user_data(context);
+
+  NSMutableArray *args = [NSMutableArray array];
+  int i;
+  for (i=0; i<argc; i++) {
+    //type = sqlite3_value_type(argv[i]);
+    switch (sqlite3_value_type(argv[i])) {
+      case SQLITE_INTEGER:
+        [args addObject:[NSNumber numberWithInt:sqlite3_value_int(argv[i])]];
+        break;
+      case SQLITE_FLOAT:
+        [args addObject:[NSNumber numberWithDouble:sqlite3_value_double(argv[i])]];
+        break;
+      case SQLITE_BLOB:
+        break;
+      case SQLITE_TEXT:
+        [args addObject:[NSString stringWithUTF8String:(const char *)sqlite3_value_text(argv[i])]];
+        break;
+      case SQLITE_NULL:
+      default:
+        [args addObject:NULL];
+        break;
+    };
+  }
   
+
+  id result =  block(args);
+
+  sqlite3_result_int(context, 3);
+}
+
+void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
+{
+  id (^block)(id) = sqlite3_user_data(context);
+  
+  NSMutableArray *args = [NSMutableArray array];
+  int i;
+  for (i=0; i<argc; i++) {
+    //type = sqlite3_value_type(argv[i]);
+    switch (sqlite3_value_type(argv[i])) {
+      case SQLITE_INTEGER:
+        [args addObject:[NSNumber numberWithInt:sqlite3_value_int(argv[i])]];
+        break;
+      case SQLITE_FLOAT:
+        [args addObject:[NSNumber numberWithDouble:sqlite3_value_double(argv[i])]];
+        break;
+      case SQLITE_BLOB:
+        break;
+      case SQLITE_TEXT:
+        [args addObject:[NSString stringWithUTF8String:(const char *)sqlite3_value_text(argv[i])]];
+        break;
+      case SQLITE_NULL:
+      default:
+        [args addObject:NULL];
+        break;
+    };
+  }
+  
+  
+  id result =  block(args);
+  
+  sqlite3_result_int(context, 3);
+}
+
+
+- (SQLite3Status)create_function_strict:(NSString *)name usingBlock:(id (^)(id)) block
+{
+  SQLite3Status status = kSQLite3StatusError;
+  int argc = 1;
+
+  __SQLite3UTF8String utf8Name = __SQLite3UTF8StringMake(connection->allocator, (CFStringRef)name);
+  status = sqlite3_create_function_v2(connection->db, __SQLite3UTF8StringGetBuffer(utf8Name), (int)argc, SQLITE_ANY, (void *)block, __sqlite_function_b, NULL, NULL, NULL);
+  __SQLite3UTF8StringDestroy(utf8Name);
+
+  return status;  
 }
 
 - (SQLite3Status)register_function:(NSString *)name usingBlock:(id (^)(id)) block
@@ -44,8 +130,6 @@ void __sqlite_function_b(sqlite3_context *context, int argc, sqlite3_value **arg
   }
 
   [function_map addObject:block];
-
-//  void (*pfunc[2])() = {__sqlite_function_a, __sqlite_function_b};
 
   NSMutableArray *func = [NSMutableArray array];
   [func addObject:(id)__sqlite_function_a];
@@ -57,9 +141,6 @@ void __sqlite_function_b(sqlite3_context *context, int argc, sqlite3_value **arg
 
 - (void) hoge
 {
-  NSLog(@"hoge");
-  
-  
-  
+  NSLog(@"%@", 1);
 }
 @end

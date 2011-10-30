@@ -24,16 +24,25 @@ class AppDelegate
     db.execute 'INSERT INTO master VALUES (2, 3.5);'
     db.execute 'INSERT INTO master VALUES (4, 2.3);'
 
-    p Proc.ancestors
-
-    db.register_function 'one_line', usingBlock:Proc.new {|args|
-      puts args
-      'nano'
+    db.create_function 'one_line', usingBlock:Proc.new {|args|
+      value,*kipple = *args
+      p value
     }
 
-    db.enumerateWithQuery 'SELECT one_line(x), id FROM master;', usingBlock:Proc.new {|row, stop|
+    # db.register_function 'one_line', usingBlock:Proc.new {|args|
+    #   puts args
+    #   'nano'
+    # }
+
+    db.enumerateWithQuery 'SELECT one_line(id), x FROM master;', usingBlock:Proc.new {|row, stop|
       p row
     }
+
+    p 3.class
+    p 3.3.class
+
+    p Fixnum.ancestors
+    p Float.ancestors
 
     db.hoge
 
