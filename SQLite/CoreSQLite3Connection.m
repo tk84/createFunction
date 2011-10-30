@@ -46,6 +46,8 @@ void __sqlite_function_a(sqlite3_context *context, int argc, sqlite3_value **arg
 
 void __sqlite_function_b(sqlite3_context *context, int argc, sqlite3_value **argv)
 {
+  return;
+  
   id (^block)(id) = sqlite3_user_data(context);
 
   NSMutableArray *args = [NSMutableArray array];
@@ -79,12 +81,12 @@ void __sqlite_function_b(sqlite3_context *context, int argc, sqlite3_value **arg
 
 void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
 {
-  id (^block)(id) = sqlite3_user_data(context);
-  
+  NSDictionary *pApp = sqlite3_user_data(context);
+  id (^block)(id) = [pApp objectForKey:@"block"];
+
   NSMutableArray *args = [NSMutableArray array];
   int i;
   for (i=0; i<argc; i++) {
-    //type = sqlite3_value_type(argv[i]);
     switch (sqlite3_value_type(argv[i])) {
       case SQLITE_INTEGER:
         [args addObject:[NSNumber numberWithInt:sqlite3_value_int(argv[i])]];
@@ -103,23 +105,42 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
         break;
     };
   }
+
+  NSLog(@"atara %@", args);
   
+  return;
   
-  id result =  block(args);
-  
-  sqlite3_result_int(context, 3);
+  NSString *str;
+  switch ((int)[pApp objectForKey:@"resultType"]) {
+    case SQLITE_INTEGER:
+      sqlite3_result_int(context, [block(args) intValue]);
+      break;
+    case SQLITE_FLOAT:
+      sqlite3_result_double(context, [block(args) doubleValue]);
+      break;
+    case SQLITE_TEXT:
+      str = block(args);
+      sqlite3_result_text(context, [str UTF8String], (int)[str length], sqlite3_free);
+      break;
+    default:
+      sqlite3_result_null(context);
+  }
 }
 
 
-- (SQLite3Status)create_function_strict:(NSString *)name usingBlock:(id (^)(id)) block
+- (SQLite3Status)createFunction:(NSMutableDictionary *)pApp usingBlock:(id (^)(id))block
 {
+//:(NSString *)name usingBlock:(id (^)(id)) block
+//  CFStringRef *name = (CFStringRef *)[info objectForKey:@"name"];
+
+  [pApp setObject:block forKey:@"block"];
+
   SQLite3Status status = kSQLite3StatusError;
-  int argc = 1;
 
-  __SQLite3UTF8String utf8Name = __SQLite3UTF8StringMake(connection->allocator, (CFStringRef)name);
-  status = sqlite3_create_function_v2(connection->db, __SQLite3UTF8StringGetBuffer(utf8Name), (int)argc, SQLITE_ANY, (void *)block, __sqlite_function_b, NULL, NULL, NULL);
+  __SQLite3UTF8String utf8Name = __SQLite3UTF8StringMake(connection->allocator, (CFStringRef)[pApp objectForKey:@"name"]);
+  status = sqlite3_create_function_v2(connection->db, __SQLite3UTF8StringGetBuffer(utf8Name), (int)[pApp objectForKey:@"argc"], SQLITE_ANY, (void *)pApp, __sqlite_function_b, NULL, NULL, NULL);
   __SQLite3UTF8StringDestroy(utf8Name);
-
+   
   return status;  
 }
 
@@ -133,7 +154,7 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
 
   NSMutableArray *func = [NSMutableArray array];
   [func addObject:(id)__sqlite_function_a];
-  
+
   SQLite3ConnectionRegisterFunction(connection, (CFStringRef)name, 1, (void(*)(sqlite3_context *, int, sqlite3_value **))[func objectAtIndex:0]);
   
   return kSQLite3StatusOK;

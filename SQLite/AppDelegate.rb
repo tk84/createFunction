@@ -10,6 +10,14 @@
 load_bridge_support_file '/Volumes/Data/Users/hiro/Documents/Xcode/lib/CoreSQLite3.framework/Versions/A/Resources/BridgeSupport/CoreSQLite3.bridgesupport'
 load_bridge_support_file '/Volumes/Data/Users/hiro/Documents/Xcode/SQLite/SQLite/bs'
 
+    class SQLite3Connection
+      def huga
+        p 'huga'
+      end
+    end
+
+
+
 class AppDelegate
   attr_accessor :window
   def applicationDidFinishLaunching(a_notification)
@@ -24,10 +32,19 @@ class AppDelegate
     db.execute 'INSERT INTO master VALUES (2, 3.5);'
     db.execute 'INSERT INTO master VALUES (4, 2.3);'
 
-    db.create_function 'one_line', usingBlock:Proc.new {|args|
-      value,*kipple = *args
-      p value
+    block = Proc.new {|args|
+      arg1 = args[0]
+      p arg1
+      return 2
     }
+
+
+    db.createFunction({'name'=>'one_line', 'argc'=>1, 'resultType'=>SQLITE_INTEGER}, usingBlock:block);
+
+    # db.create_function_strict 'one_line', usingBlock:Proc.new {|args|
+    #   value,*kipple = *args
+    #   p value
+    # }
 
     # db.register_function 'one_line', usingBlock:Proc.new {|args|
     #   puts args
@@ -38,13 +55,6 @@ class AppDelegate
       p row
     }
 
-    p 3.class
-    p 3.3.class
-
-    p Fixnum.ancestors
-    p Float.ancestors
-
-    db.hoge
 
   end
 end
