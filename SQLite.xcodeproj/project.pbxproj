@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4528AD07145EB4F800BBD753 /* AppDelegate.rb in Headers */ = {isa = PBXBuildFile; fileRef = 456D2A73145D7B0300B1513F /* AppDelegate.rb */; settings = {ATTRIBUTES = (Public, ); }; };
+		4528AD2A145EFCBB00BBD753 /* SQLite3Connection.rb in Resources */ = {isa = PBXBuildFile; fileRef = 4528AD29145EFCBB00BBD753 /* SQLite3Connection.rb */; };
 		456D2A5F145D7B0300B1513F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456D2A5E145D7B0300B1513F /* Cocoa.framework */; };
 		456D2A61145D7B0300B1513F /* MacRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456D2A60145D7B0300B1513F /* MacRuby.framework */; };
 		456D2A68145D7B0300B1513F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 456D2A66145D7B0300B1513F /* InfoPlist.strings */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4528AD29145EFCBB00BBD753 /* SQLite3Connection.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = SQLite3Connection.rb; path = ../../../../lib/SQLite3Connection.rb; sourceTree = "<group>"; };
 		456D2A5A145D7B0300B1513F /* SQLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SQLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		456D2A5E145D7B0300B1513F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		456D2A60145D7B0300B1513F /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = Library/Frameworks/MacRuby.framework; sourceTree = DEVELOPER_DIR; };
@@ -125,6 +127,7 @@
 		456D2A63145D7B0300B1513F /* SQLite */ = {
 			isa = PBXGroup;
 			children = (
+				4528AD29145EFCBB00BBD753 /* SQLite3Connection.rb */,
 				456D2A73145D7B0300B1513F /* AppDelegate.rb */,
 				456D2A6C145D7B0300B1513F /* Resources */,
 				456D2A70145D7B0300B1513F /* Other Sources */,
@@ -299,6 +302,7 @@
 				456D2A6F145D7B0300B1513F /* MainMenu.xib in Resources */,
 				456D2A72145D7B0300B1513F /* rb_main.rb in Resources */,
 				456D2A74145D7B0300B1513F /* AppDelegate.rb in Resources */,
+				4528AD2A145EFCBB00BBD753 /* SQLite3Connection.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

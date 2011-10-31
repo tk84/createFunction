@@ -38,22 +38,40 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
     };
   }
 
-  NSString *str;
-  switch ([[pApp objectForKey:@"dataType"] intValue]) {
+  id res = block(args);
+
+  [res isKindOfClass:NSClassFromString(@"String")];
+
+  int datatype = [[pApp objectForKey:@"dataType"] intValue];
+  if (datatype != SQLITE_INTEGER && datatype != SQLITE_FLOAT && datatype != SQLITE_TEXT && datatype != SQLITE_NULL) {
+    //自動判別
+    if ([res isKindOfClass:NSClassFromString(@"Integer")]) {
+      datatype = SQLITE_INTEGER;
+    } else if ( [res isKindOfClass:NSClassFromString(@"Float")] ) {
+      datatype = SQLITE_FLOAT;
+    } else if ( [res isKindOfClass:NSClassFromString(@"NSString")] ) {
+      datatype = SQLITE_TEXT;
+    } else {
+      datatype = SQLITE_NULL;
+    }
+  }
+
+  switch ( datatype ) {
     case SQLITE_INTEGER:
-      sqlite3_result_int(context, [block(args) intValue]);
+      sqlite3_result_int(context, [res intValue]);
       break;
     case SQLITE_FLOAT:
-      sqlite3_result_double(context, [block(args) doubleValue]);
+      sqlite3_result_double(context, [res doubleValue]);
       break;
     case SQLITE_TEXT:
-      str = block(args);
-      sqlite3_result_text(context, [str UTF8String], (int)[str lengthOfBytesUsingEncoding:NSUTF8StringEncoding], NULL);
-      [str release];
+      sqlite3_result_text(context, [res UTF8String], (int)[res lengthOfBytesUsingEncoding:NSUTF8StringEncoding], NULL);
       break;
+    case SQLITE_NULL:
     default:
       sqlite3_result_null(context);
   }
+
+  [res release];
 }
 
 + (NSMutableDictionary *)pApp:(NSUInteger)i object:(NSMutableDictionary *)pApp

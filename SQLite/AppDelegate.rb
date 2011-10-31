@@ -41,7 +41,7 @@ class AppDelegate
     p "5".class.ancestors
     p 5.class.ancestors
     p 5.5.class.ancestors
-    return
+
     
     #    File.unlink '/tmp/my.db' if File.file? '/tmp/my.db'
 
@@ -86,13 +86,20 @@ class AppDelegate
 
 
 
-    db.createFunction 'oneline', dataType:SQLITE_TEXT, usingBlock:Proc.new{|args|
-                      args[0].
-                      # gsub(/(<[^>]*>|\s)/, ' ').
-                      gsub(/\s+/, ' ').
-                      gsub(/(^\s|\s$)/, '')
-                      }
+    #    db.createFunction 'oneline', dataType:SQLITE_TEXT, usingBlock:Proc.new{|args|
+    #                      args[0].
+    #                      # gsub(/(<[^>]*>|\s)/, ' ').
+    #                      gsub(/\s+/, ' ').
+    #                      gsub(/(^\s|\s$)/, '')
+    #                      }
 
+    db.create_function 'oneline', do |text|
+      text.
+                            # gsub(/(<[^>]*>|\s)/, ' ').
+                            gsub(/\s+/, ' ').
+                            gsub(/(^\s|\s$)/, '')
+    end
+    
     db.createFunction('ftime_to_srtime', dataType:SQLITE_TEXT, usingBlock:Proc.new{|args|
                          ftime,*kipple = *args
                          h = ftime / 3600
@@ -110,7 +117,7 @@ class AppDelegate
     #}
 
     db.query 'SELECT ftime_to_srtime(begin_time), ftime_to_srtime(end_time), oneline(caption) FROM master;' do |row|
-      #p row
+      p row
     end
 
     p 'unkounko'
