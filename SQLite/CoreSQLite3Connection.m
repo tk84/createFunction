@@ -10,10 +10,29 @@
 
 @implementation SQLite3Connection (Function)
 
+id hoge;
 void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
 {
-  NSDictionary *pApp = sqlite3_user_data(context);
+//  id (^block)(id) = [hoge objectForKey:@"block"];
+//  id (^block)(id) = sqlite3_user_data(context);
+  
+//  id pApp = sqlite3_user_data(context);
+
+  id pApp = [SQLite3Connection pApp:(NSUInteger)sqlite3_user_data(context) object:NULL];
+//  id pApp = [hoge objectAtIndex:(NSUInteger)sqlite3_user_data(context)];
+
+//  NSLog(@"%@", pApp);
+//  NSLog(@"%@", [pApp objectForKey:@"block"]);
+
+//  NSLog(@"%@", [pApp objectForKey:@"name"]);
+  
   id (^block)(id) = [pApp objectForKey:@"block"];
+
+//  id (^block)(id) = hoge;
+
+  
+//  return;
+//  id (^block)(id) = [pApp objectForKey:@"block"];
 
   NSMutableArray *args = [NSMutableArray array];
   int i;
@@ -47,24 +66,47 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
       break;
     case SQLITE_TEXT:
       str = block(args);
-      //sqlite3_result_text(context, [str UTF8String], (int)[str length], NULL);
+//      NSLog(@"%d", (int)[str length]);
+      sqlite3_result_text(context, [str UTF8String], (int)[str lengthOfBytesUsingEncoding:NSUTF8StringEncoding], NULL);
+      [str release];
       break;
     default:
       sqlite3_result_null(context);
   }
 }
 
++ (NSMutableDictionary *)pApp:(NSUInteger)i object:(NSMutableDictionary *)pApp
+{
+  static NSMutableArray *pApps;
+
+  if (NULL == pApps) {
+    pApps = [NSMutableArray array];
+  }
+  
+  if (pApp) {
+    i = [pApps count];
+    [pApp setObject:[NSNumber numberWithUnsignedInteger:i] forKey:@"i"];
+    [pApps addObject:pApp];
+  }
+
+  return [pApps objectAtIndex:i];
+}
+
 - (SQLite3Status)createFunction:(NSMutableDictionary *)pApp usingBlock:(id (^)(id))block
 {
-//:(NSString *)name usingBlock:(id (^)(id)) block
-//  CFStringRef *name = (CFStringRef *)[info objectForKey:@"name"];
-
-  [pApp setObject:block forKey:@"block"];
-
   SQLite3Status status = kSQLite3StatusError;
 
   __SQLite3UTF8String utf8Name = __SQLite3UTF8StringMake(connection->allocator, (CFStringRef)[pApp objectForKey:@"name"]);
-  status = sqlite3_create_function_v2(connection->db, __SQLite3UTF8StringGetBuffer(utf8Name), [[pApp objectForKey:@"argc"] intValue], SQLITE_ANY, (void *)pApp, __xFunc, NULL, NULL, NULL);
+
+  [pApp setObject:(id)block forKey:@"block"];
+  NSUInteger i = [[[SQLite3Connection pApp:0 object:pApp] objectForKey:@"i"] unsignedIntegerValue];
+
+  if (NULL == hoge) {
+    hoge = [NSMutableArray array];
+  }
+  [hoge addObject:pApp];
+  
+  status = sqlite3_create_function_v2(connection->db, __SQLite3UTF8StringGetBuffer(utf8Name), [[pApp objectForKey:@"argc"] intValue], SQLITE_ANY, /*(void *)block*/(void *)i/*([hoge count] - 1)*/, __xFunc, NULL, NULL, NULL);
   __SQLite3UTF8StringDestroy(utf8Name);
    
   return status;  

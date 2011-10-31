@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4528AD07145EB4F800BBD753 /* AppDelegate.rb in Headers */ = {isa = PBXBuildFile; fileRef = 456D2A73145D7B0300B1513F /* AppDelegate.rb */; settings = {ATTRIBUTES = (Public, ); }; };
 		456D2A5F145D7B0300B1513F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456D2A5E145D7B0300B1513F /* Cocoa.framework */; };
 		456D2A61145D7B0300B1513F /* MacRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456D2A60145D7B0300B1513F /* MacRuby.framework */; };
 		456D2A68145D7B0300B1513F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 456D2A66145D7B0300B1513F /* InfoPlist.strings */; };
@@ -220,6 +221,7 @@
 				456D2AAF145D7CD600B1513F /* SQLite3ExtMath.h in Headers */,
 				456D2AB0145D7CD900B1513F /* SQLite3Migration.h in Headers */,
 				456D2AB1145D7CE200B1513F /* SQLite3Observer.h in Headers */,
+				4528AD07145EB4F800BBD753 /* AppDelegate.rb in Headers */,
 				456D2AB2145D7CE800B1513F /* SQLite3Statement.h in Headers */,
 				456D2AB9145D7F0E00B1513F /* CoreSQLite3Connection.h in Headers */,
 			);
@@ -399,7 +401,7 @@
 					"$(inherited)",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SQLite/SQLite-Prefix.pch";
 				INFOPLIST_FILE = "SQLite/SQLite-Info.plist";
@@ -415,7 +417,7 @@
 					"$(inherited)",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SQLite/SQLite-Prefix.pch";
 				INFOPLIST_FILE = "SQLite/SQLite-Info.plist";
@@ -455,6 +457,7 @@
 				456D2A79145D7B0300B1513F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		456D2A7A145D7B0300B1513F /* Build configuration list for PBXLegacyTarget "Deployment" */ = {
 			isa = XCConfigurationList;
@@ -463,6 +466,7 @@
 				456D2A7C145D7B0300B1513F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
