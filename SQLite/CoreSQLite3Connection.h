@@ -11,7 +11,7 @@
 
 @interface SQLite3Connection (Function)
 void __xFunc(sqlite3_context *context, int argc, sqlite3_value **argv);
-- (void) hoge;
 + (NSDictionary *)pApp:(NSUInteger)i object:(NSDictionary *)pApp;
-- (SQLite3Status)createFunction:(NSDictionary *)pApp usingBlock:(id (^)(id)) block;
+- (SQLite3Status)createFunction:(NSString *)name dataType:(int)dataType usingBlock:(id (^)(id)) block;
+- (void) hoge;
 @end

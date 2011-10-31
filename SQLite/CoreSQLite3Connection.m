@@ -10,31 +10,13 @@
 
 @implementation SQLite3Connection (Function)
 
-id hoge;
 void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
 {
-//  id (^block)(id) = [hoge objectForKey:@"block"];
-//  id (^block)(id) = sqlite3_user_data(context);
-  
-//  id pApp = sqlite3_user_data(context);
-
   id pApp = [SQLite3Connection pApp:(NSUInteger)sqlite3_user_data(context) object:NULL];
-//  id pApp = [hoge objectAtIndex:(NSUInteger)sqlite3_user_data(context)];
-
-//  NSLog(@"%@", pApp);
-//  NSLog(@"%@", [pApp objectForKey:@"block"]);
-
-//  NSLog(@"%@", [pApp objectForKey:@"name"]);
-  
   id (^block)(id) = [pApp objectForKey:@"block"];
 
-//  id (^block)(id) = hoge;
-
-  
-//  return;
-//  id (^block)(id) = [pApp objectForKey:@"block"];
-
   NSMutableArray *args = [NSMutableArray array];
+
   int i;
   for (i=0; i<argc; i++) {
     switch (sqlite3_value_type(argv[i])) {
@@ -55,9 +37,9 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
         break;
     };
   }
- 
+
   NSString *str;
-  switch ([[pApp objectForKey:@"resultType"] intValue]) {
+  switch ([[pApp objectForKey:@"dataType"] intValue]) {
     case SQLITE_INTEGER:
       sqlite3_result_int(context, [block(args) intValue]);
       break;
@@ -66,7 +48,6 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
       break;
     case SQLITE_TEXT:
       str = block(args);
-//      NSLog(@"%d", (int)[str length]);
       sqlite3_result_text(context, [str UTF8String], (int)[str lengthOfBytesUsingEncoding:NSUTF8StringEncoding], NULL);
       [str release];
       break;
@@ -92,24 +73,15 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
   return [pApps objectAtIndex:i];
 }
 
-- (SQLite3Status)createFunction:(NSMutableDictionary *)pApp usingBlock:(id (^)(id))block
+- (SQLite3Status)createFunction:(NSString *)name dataType:(int)dataType usingBlock:(id (^)(id)) block;
 {
-  SQLite3Status status = kSQLite3StatusError;
-
-  __SQLite3UTF8String utf8Name = __SQLite3UTF8StringMake(connection->allocator, (CFStringRef)[pApp objectForKey:@"name"]);
-
+  NSMutableDictionary *pApp = [NSMutableDictionary dictionary];
+  [pApp setObject:name forKey:@"name"];
   [pApp setObject:(id)block forKey:@"block"];
+  [pApp setObject:[NSNumber numberWithInt:dataType] forKey:@"dataType"];
   NSUInteger i = [[[SQLite3Connection pApp:0 object:pApp] objectForKey:@"i"] unsignedIntegerValue];
 
-  if (NULL == hoge) {
-    hoge = [NSMutableArray array];
-  }
-  [hoge addObject:pApp];
-  
-  status = sqlite3_create_function_v2(connection->db, __SQLite3UTF8StringGetBuffer(utf8Name), [[pApp objectForKey:@"argc"] intValue], SQLITE_ANY, /*(void *)block*/(void *)i/*([hoge count] - 1)*/, __xFunc, NULL, NULL, NULL);
-  __SQLite3UTF8StringDestroy(utf8Name);
-   
-  return status;  
+  return sqlite3_create_function_v2(connection->db, [name UTF8String], -1, SQLITE_ANY, (void *)i, __xFunc, NULL, NULL, NULL);
 }
 
 - (void) hoge

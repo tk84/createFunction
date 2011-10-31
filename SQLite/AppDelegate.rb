@@ -38,6 +38,11 @@ class AppDelegate
   def applicationDidFinishLaunching(a_notification)
     # Insert code here to initialize your application
 
+    p "5".class.ancestors
+    p 5.class.ancestors
+    p 5.5.class.ancestors
+    return
+    
     #    File.unlink '/tmp/my.db' if File.file? '/tmp/my.db'
 
     db = SQLite3Connection.new
@@ -81,16 +86,14 @@ class AppDelegate
 
 
 
-    db.createFunction({'name'=>'oneline', 'argc'=>1, 'resultType'=>SQLITE_TEXT},
-                      usingBlock:Proc.new{|args|
+    db.createFunction 'oneline', dataType:SQLITE_TEXT, usingBlock:Proc.new{|args|
                       args[0].
                       # gsub(/(<[^>]*>|\s)/, ' ').
                       gsub(/\s+/, ' ').
                       gsub(/(^\s|\s$)/, '')
-                      })
+                      }
 
-    db.createFunction({'name'=>'ftime_to_srtime', 'argc'=>1, 'resultType'=>SQLITE_TEXT},
-        usingBlock:Proc.new{|args|
+    db.createFunction('ftime_to_srtime', dataType:SQLITE_TEXT, usingBlock:Proc.new{|args|
                          ftime,*kipple = *args
                          h = ftime / 3600
                          ftime %= 3600
@@ -107,7 +110,7 @@ class AppDelegate
     #}
 
     db.query 'SELECT ftime_to_srtime(begin_time), ftime_to_srtime(end_time), oneline(caption) FROM master;' do |row|
-      #      p row
+      #p row
     end
 
     p 'unkounko'
