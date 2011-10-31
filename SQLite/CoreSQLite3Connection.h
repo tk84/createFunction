@@ -13,5 +13,4 @@
 void __xFunc(sqlite3_context *context, int argc, sqlite3_value **argv);
 + (NSDictionary *)pApp:(NSUInteger)i object:(NSDictionary *)pApp;
 - (SQLite3Status)createFunction:(NSString *)name dataType:(int)dataType usingBlock:(id (^)(id)) block;
-- (void) hoge;
 @end

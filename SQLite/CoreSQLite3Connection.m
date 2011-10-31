@@ -102,8 +102,4 @@ void __xFunc (sqlite3_context *context, int argc, sqlite3_value **argv)
   return sqlite3_create_function_v2(connection->db, [name UTF8String], -1, SQLITE_ANY, (void *)i, __xFunc, NULL, NULL, NULL);
 }
 
-- (void) hoge
-{
-  NSLog(@"%@", 1);
-}
 @end
